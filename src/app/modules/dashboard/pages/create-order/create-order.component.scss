@@ -1,0 +1,56 @@
+.create-order{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .container{
+
+    .breadcrumb{
+      margin-top: 50px;
+    }
+
+    .title{
+      margin-top: 4rem;
+    }
+
+    form{
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .card{
+        max-width: 30rem;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        .card-title{
+          margin: 20px;
+
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+        .inputs{
+          margin-bottom: 50px;
+          .form-group{
+            padding: 8px 16px 0px 16px;
+            .input-label{
+              margin-bottom: 8px;
+            }
+          }
+        }
+
+      }
+      .save-btn{
+        margin-top: 20px;
+        margin-bottom: 50px;
+        padding: 8px;
+        max-width: 10rem;
+      }
+    }
+
+
+
+  }
+
+}

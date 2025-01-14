@@ -1,0 +1,26 @@
+<div class="login-container">
+
+    <div class="login-card shadow-sm p-3 mb-5 bg-white rounded">
+      <h1 class="title" >Login</h1>
+      <div class="login-error">{{ this.userService.logiError() }}</div>
+      <form [formGroup]="loginForm" class="login-card">
+        <div class="input user">
+          <label for="typeahead-basic">Email</label>
+          <input id="typeahead-basic" type="text" class="form-control" formControlName="user"/>
+        </div>
+
+        <div class="input password">
+          <label for="typeahead-basic">Senha</label>
+          <input id="typeahead-basic" type="password" class="form-control" formControlName='password'/>
+        </div>
+
+        <a class="forgot-pass-link" >Esqueceu sua senha?</a>
+
+        <button type="button" class="btn btn-primary bt-login" (click)="onHandleSubmitForm()">entrar</button>
+
+        <div class="register"><p>Novo por aqui?</p><a href="register" class="register-link">Cadastre-se</a></div>
+
+      </form>
+    </div>
+
+</div>

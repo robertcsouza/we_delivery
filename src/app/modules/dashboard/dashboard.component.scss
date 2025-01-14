@@ -1,0 +1,33 @@
+.container{
+
+  .breadcrumb{
+    margin-top: 50px;
+  }
+
+  .new-order{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+
+  }
+
+  .order-content{
+    display: flex;
+    flex-direction: row;
+    gap:4px;
+    .order-title{
+      font-weight: 600;
+    }
+  }
+
+  .card-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+
+
+}

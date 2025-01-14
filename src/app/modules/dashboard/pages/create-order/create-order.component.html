@@ -1,0 +1,104 @@
+<div class="create-order">
+  <app-nav-bar></app-nav-bar>
+  <div class="container">
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Início</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><a href="dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">create-order</li>
+      </ol>
+    </nav>
+
+
+    <h2 class="title">Solicitar Uma entrega</h2>
+    <form>
+      <div class="card receiver">
+        <div class="card-title">
+          <h4>Informações do Recebedor</h4>
+          <button type="button" class="btn btn-outline-primary">editar</button>
+        </div>
+
+        <div class="inputs">
+          <div class="form-group name-input">
+            <label class="input-label" for="exampleInputEmail1">Nome</label>
+            <input type="name" class="form-control" id="email" aria-describedby="input name" placeholder="Nome">
+          </div>
+          <div class="form-group name-input">
+            <label class="input-label" for="exampleInputEmail1">CPF</label>
+            <input type="name" class="form-control" id="email" aria-describedby="input name" placeholder="00.000.000-00">
+          </div>
+          <div class="form-group name-input">
+            <label class="input-label" for="exampleInputEmail1">Telefone</label>
+            <input type="name" class="form-control" id="email" aria-describedby="input name" placeholder="(69) 000000000">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card address">
+        <div class="card-title">
+          <h4>Informações da Encomenda</h4>
+          <button type="button" class="btn btn-outline-primary">editar</button>
+        </div>
+
+        <div class="inputs">
+          <div class="form-group name-input">
+            <label class="input-label" for="exampleInputEmail1">Tamanho</label>
+            <input type="text" class="form-control" id="street" aria-describedby="input street" placeholder="P,M,G">
+          </div>
+          <div class="form-group name-input">
+            <label class="input-label" for="exampleInputEmail1">Peso</label>
+            <input type="text" class="form-control" id="neighborhood" aria-describedby="input neighborhood" placeholder="P,M,G">
+          </div>
+          <div class="form-group name-input">
+            <label class="input-label" for="exampleInputEmail1">Para entrega</label>
+            <input type="text" class="form-control" id="city" aria-describedby="input City" placeholder="Porto Velho">
+          </div>
+          <div class="form-group name-input">
+            <label class="input-label" for="exampleInputEmail1">Observação</label>
+            <input type="text" class="form-control" id="city" aria-describedby="Estado" placeholder="RO">
+          </div>
+        </div>
+      </div>
+
+      <div class="card address">
+        <div class="card-title">
+          <h4>Endereço</h4>
+          <button type="button" class="btn btn-outline-primary">editar</button>
+        </div>
+
+        <div class="inputs">
+          <div class="form-group name-input">
+            <label class="input-label" for="exampleInputEmail1">Rua</label>
+            <input type="text" class="form-control" id="street" aria-describedby="input street" placeholder="Ex: Rua 1">
+          </div>
+          <div class="form-group name-input">
+            <label class="input-label" for="exampleInputEmail1">Bairro</label>
+            <input type="text" class="form-control" id="neighborhood" aria-describedby="input neighborhood" placeholder="Ex:Centro">
+          </div>
+          <div class="form-group name-input">
+            <label class="input-label" for="exampleInputEmail1">Cidade</label>
+            <input type="text" class="form-control" id="city" aria-describedby="input City" placeholder="Porto Velho">
+          </div>
+          <div class="form-group name-input">
+            <label class="input-label" for="exampleInputEmail1">Estado</label>
+            <input type="text" class="form-control" id="city" aria-describedby="Estado" placeholder="RO">
+          </div>
+          <div class="form-group name-input">
+            <label class="input-label" for="exampleInputEmail1">País</label>
+            <input type="text" class="form-control" id="country" aria-describedby="Pais" placeholder="BR">
+          </div>
+          <div class="form-group name-input">
+            <label class="input-label" for="exampleInputEmail1">CEP</label>
+            <input type="text" class="form-control" id="country" aria-describedby="postal code" placeholder="00.000-000">
+          </div>
+        </div>
+
+      </div>
+
+      <button  type="button" class="save-btn btn btn-primary">Solicitar Entrega</button>
+
+    </form>
+
+</div>
