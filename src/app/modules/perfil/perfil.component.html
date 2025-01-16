@@ -1,18 +1,26 @@
 <app-nav-bar></app-nav-bar>
+<div class="profile" >
+
+
 <div class="profile-container">
   <h1>Perfil</h1>
 
   <!-- Personal Information Card -->
-  <div class="profile-card">
+  <div class="profile-card not-editable">
     <div class="card-header">
-      <h2>Informações Pessoais</h2>
-      <button
-        class="edit-button"
+      <h3>Informação Pessoal</h3>
+      <i
+        [ngClass]="!isPersonalEditing?'bi bi-pencil':'bi bi-x'"
         (click)="togglePersonalEdit()"
         [class.active]="isPersonalEditing">
-        <i class="fas fa-pencil-alt"></i>
-        {{ isPersonalEditing ? 'Cancelar' : 'Editar' }}
-      </button>
+      </i>
+      <!-- <button
+      class="edit-button"
+      (click)="togglePersonalEdit()"
+      [class.active]="isPersonalEditing">
+      <i class="bi bi-pencil"></i>
+      {{ isPersonalEditing ? 'Cancelar' : 'Editar' }}
+    </button> -->
     </div>
 
     <form [formGroup]="personalForm" *ngIf="isPersonalEditing" (ngSubmit)="savePersonal()">
@@ -36,9 +44,15 @@
     </form>
 
     <div class="info-display" *ngIf="!isPersonalEditing">
+
       <div class="info-row">
-        <span class="label">Nome:</span>
-        <span class="value">{{ personalForm.get('name')?.value }}</span>
+        <h2>Roberto Chaves Souza</h2>
+      </div>
+      <div class="info-row">
+        <h3>{{"roberto@gmail.com"}}</h3>
+      </div>
+      <div class="info-row">
+        <h3>CPF 033.055.433-66</h3>
       </div>
     </div>
   </div>
@@ -47,13 +61,18 @@
   <div class="profile-card">
     <div class="card-header">
       <h2>Endereço</h2>
-      <button
+      <i
+        [ngClass]="!isAddressEditing ?'bi bi-pencil':'bi bi-x'"
+        (click)="toggleAddressEdit()"
+        [class.active]="isAddressEditing">
+      </i>
+      <!-- <button
         class="edit-button"
         (click)="toggleAddressEdit()"
         [class.active]="isAddressEditing">
         <i class="fas fa-pencil-alt"></i>
         {{ isAddressEditing ? 'Cancelar' : 'Editar' }}
-      </button>
+      </button> -->
     </div>
 
     <form [formGroup]="addressForm" *ngIf="isAddressEditing" (ngSubmit)="saveAddress()">
@@ -132,4 +151,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>
