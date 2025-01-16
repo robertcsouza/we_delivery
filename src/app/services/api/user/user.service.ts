@@ -1,14 +1,14 @@
 
-import {  inject, Injectable } from '@angular/core';
+import {  inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
 import { AuthAction, AuthRequest, AuthResponse } from '../../../models/interfaces/user/RequestInterface';
-import { catchError, EMPTY, map, Observable, of, Subject, switchMap, take, tap } from 'rxjs';
+import { BehaviorSubject, catchError, EMPTY, map, Observable, of, OperatorFunction, Subject, switchMap, take, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import {toSignal} from '@angular/core/rxjs-interop'
+import {takeUntilDestroyed, toSignal} from '@angular/core/rxjs-interop'
 import { Router } from '@angular/router';
 import { Action } from 'src/app/models/enums/UserEnums';
-
+type SortDirection = 'ASC' | 'DESC';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,86 +19,52 @@ export class UserService {
   private readonly cookie:CookieService = inject(CookieService)
   private readonly router:Router = inject(Router)
 
-  authenticateUser$ = new Subject()
-  auth$ = new Observable()
-  logiError = toSignal(this.authenticateUser$.pipe(switchMap((_)=>this.auth$)),{initialValue:null})
+  loginError = signal<string|undefined>(undefined)
 
-  public login(request:AuthRequest){
-    this.authenticateUser$.next(
-     this.authActions({action:Action.LOGIN,body:request})
-    )
+  public login = this.effect(switchMap((input:string)=>this._login(input)),this.loginError)
+
+  dologin(){
+    this.login('qualquer coisa')
   }
 
-  public register(request:AuthRequest){
-    this.authenticateUser$.next(
-     this.authActions({action:Action.REGISTER,body:request})
-    )
-  }
-
-  private authActions(params:AuthAction){
-    switch(params.action){
-      case Action.LOGIN:
-        this.auth$ = this.authenticateRequest(params.body)
-        break;
-      case Action.REGISTER:
-        this.auth$ = this.registerRequest(params.body)
-        break;
-      default:
-        this.auth$ = EMPTY;
+  effect<T,U>(fn: OperatorFunction<T, U>,errorSignal?:WritableSignal<string | undefined>):(input:T)=> void{
+    const subject = new Subject<T>()
+    subject.pipe(
+      fn,
+      takeUntilDestroyed()
+    ).subscribe(
+      {
+        error:(err)=>{
+          errorSignal?.set(err)
+        }
       }
-
+    )
+    return (input)=>{
+        subject.next(input)
+    }
   }
 
 
 
-
-
-  private authenticateRequest(request:AuthRequest){
-    return this.http.post<AuthResponse>(`${this.API_URL}/user/login`,request).pipe(
-      tap({
-        next:(response)=>{
-          if(response.status ===  'success'){
-            this.cookie.delete('bearer')
-            this.cookie.set('bearer',response.data)
-            this.router.navigate(['/dashboard'])
-          }
-          return EMPTY
-        }
-      }),
-
-      map((response)=>{
-        if(response.status ===  'success')  return null
-        return response.data
-      } )
+  private _login(userName:string){
+    //requisiçao pra api
+   return  of(`retorno do login`).pipe(
+      map(()=>{throw 'erro no pipe'})
     )
   }
 
-  private registerRequest(request:AuthRequest){
-    return this.http.post<AuthResponse>(`${this.API_URL}/user/register`,request).pipe(
-      tap({
-        next:(response)=>{
-          if(response.status ===  'success'){
-            this.router.navigate(['/login'])
-          }
-          return EMPTY
-        }
-      }),
 
-      map((response)=>{
-        if(response.status ===  'success')  return null
-        return response.data
-      } )
-    )
-  }
+
+
+
+
+
+
 
   isLoggedIn(): boolean {
     const JWT_TOKEN = this.cookie.get('bearer');
     return JWT_TOKEN ? true : false;
   }
-
-
-
-
 
 }
 

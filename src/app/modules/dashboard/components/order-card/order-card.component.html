@@ -1,37 +1,25 @@
-<div class="card">
-  <div class="card-header">
-    <div class="user-detail">
-      <div class="header-text">
-        <h5>pedido realizado </h5>
-        <h5>11 janeiro 2025</h5>
+<div class="purchase-date">{{ purchase.date }}</div>
+<div class="purchase-card">
+  <div class="purchase-info">
+    <div class="purchase-details">
+      <div class="status">
+        <span class="status-label">{{ purchase.status }}</span>
+        <span class="delivery-date">
+          Você retirou no dia {{ purchase.deliveryDate }}
+          <i class="bi bi-lightning-charge-fill"></i>
+        </span>
       </div>
-
-      <div class="header-text">
-        <h5>Total </h5>
-        <h5>R$ 11,90</h5>
-      </div>
-
-      <div class="header-text address-title">
-        <h5>Enviar para</h5>
-        <a href="#">Roberto Chaves Souza</a>
-      </div>
+      <div class="product-name">{{ purchase.product.name }}</div>
+      <div class="quantity">{{ purchase.product.quantity }}</div>
     </div>
-
-
-      <div class="oder-id">
-        <h5>DETALHES PEDIDO</h5>
-        <a href="#">6779e9f3c20b6ee494d0e859</a>
-      </div>
   </div>
-  <div class="card-body">
-   <div order-deti>
-    <h3>Pagamento já Realizado</h3>
-    <h4>Pedido solicitado para entrega</h4>
-    <h4>Horário para entrega: 19:30</h4>
-   </div>
-   <div class="actions">
-    <button type="button" class="btn btn-primary">Avaliar Entrega</button>
-    <button type="button" class="btn btn-outline-primary">Entrar em Contato</button>
-   </div>
+
+  <div class="purchase-actions">
+    <div class="seller">Entregar para</div>
+    <a href="#" class="message-link">Roberto chaves Souza</a>
+    <div class="buttons">
+      <button class="primary-button">Avaliar entrega</button>
+      <button class="secondary-button">Falar sobre Entrega</button>
+    </div>
   </div>
 </div>

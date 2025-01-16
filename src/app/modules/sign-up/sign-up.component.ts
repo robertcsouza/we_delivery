@@ -8,7 +8,9 @@ import { FormBuilder, Validators } from '@angular/forms';
     standalone: false
 })
 export class SignUpComponent implements OnInit {
-   formBuilder:FormBuilder = inject(FormBuilder)
+  showPassword = false;
+  showConfirmPassword = false;
+  formBuilder:FormBuilder = inject(FormBuilder)
   constructor(){}
 
 

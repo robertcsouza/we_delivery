@@ -1,26 +1,59 @@
+
 <div class="login-container">
+  <app-nav-bar></app-nav-bar>
+  <div class="login-card">
+    <div class="top-bar">
+      <span class="register-text">
+        não tem uma conta?
+        <a href="/register" class="create-account">Crie sua conta</a>
+      </span>
+    </div>
 
-    <div class="login-card shadow-sm p-3 mb-5 bg-white rounded">
-      <h1 class="title" >Login</h1>
-      <div class="login-error">{{ this.userService.logiError() }}</div>
-      <form [formGroup]="loginForm" class="login-card">
-        <div class="input user">
-          <label for="typeahead-basic">Email</label>
-          <input id="typeahead-basic" type="text" class="form-control" formControlName="user"/>
+    <div class="login-content">
+      <h2 class="welcome-text">Bem vindo de volta! 👋</h2>
+      <h1 class="login-title">Entre com sua conta</h1>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="user"
+            placeholder="johndoe@gmail.com"
+            class="form-control"
+          />
+          <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid"
+               class="error-message">
+            This email is not registered with us!
+          </div>
         </div>
 
-        <div class="input password">
-          <label for="typeahead-basic">Senha</label>
-          <input id="typeahead-basic" type="password" class="form-control" formControlName='password'/>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-input-container">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              id="password"
+              formControlName="password"
+              placeholder="Enter password"
+              class="form-control"
+            />
+            <button type="button" class="toggle-password" (click)="togglePassword()">
+              <i [ngClass]="this.showPassword ? 'bi bi-eye-fill': 'bi bi-eye-slash-fill'" ></i>
+            </button>
+          </div>
         </div>
 
-        <a class="forgot-pass-link" >Esqueceu sua senha?</a>
+        <button type="submit" class="login-button" [disabled]="!loginForm.valid">
+          Login
+        </button>
 
-        <button type="button" class="btn btn-primary bt-login" (click)="onHandleSubmitForm()">entrar</button>
-
-        <div class="register"><p>Novo por aqui?</p><a href="register" class="register-link">Cadastre-se</a></div>
+        <div class="forgot-password">
+          <a href="/forgot-password">Forgot Password?</a>
+        </div>
 
       </form>
     </div>
-
+  </div>
 </div>

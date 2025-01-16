@@ -1,29 +1,20 @@
-<nav class="navbar navbar-expand-lg navbar-light ">
+<nav class="navbar">
+  <div class="navbar-container">
+    <a href="#" class="logo">Nos recebemos</a>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleCollapse()">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <!-- Mobile menu button -->
+    <button class="mobile-menu-btn" (click)="toggleMenu()" [class.active]="isMenuOpen">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
 
-  <div class="collapse navbar-collapse menu" id="navbarSupportedContent" [hidden]="this.is_collapsed">
-    <a class="navbar-brand" href="#">We received</a>
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Início</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Solicitar Entrega</a>
-        </li>
-
-      </ul>
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link perfil" href="#">Olá,Roberto</a>
-        </li>
-      </ul>
-
-
-
+    <!-- Nav links -->
+    <div class="nav-links" [class.active]="isMenuOpen">
+      <a href="home">Início</a>
+      <a href="dashboard/order/create">Solicitar</a>
+      <a href="about">About</a>
+      <a class="perfil-menu" href="perfil" >Olá,Roberto</a>
+    </div>
   </div>
-
-
 </nav>
