@@ -12,8 +12,22 @@ export interface RegisterRequest {
   cpf: string
 }
 
+export interface UserResponse {
+  message: string
+  status: string
+  data: UserData
+}
 
-
+export interface UserData {
+  id: string
+  name: string
+  email: string
+  cpf: string
+  tel: any
+  whats_app: any
+  is_admin: boolean
+  address: any
+}
 
 
 export interface AuthAction {
@@ -22,6 +36,8 @@ export interface AuthAction {
   body?:any;
 
 }
+
+
 export interface AuthResponse {
   message: string;
   status: string;

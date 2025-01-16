@@ -6,7 +6,7 @@ import { SignUpComponent } from './modules/sign-up/sign-up.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { CreateOrderComponent } from './modules/dashboard/pages/create-order/create-order.component';
-import { PerfilComponent } from './modules/perfil/perfil.component';
+import { ProfileComponent } from './modules/profile/profile.component';
 
 const routes: Routes = [
 {
@@ -38,7 +38,7 @@ const routes: Routes = [
 },
 {
   path: 'perfil',
-  component:PerfilComponent,
+  component:ProfileComponent,
   canActivate: [AuthGuard],
 },
 // {

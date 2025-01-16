@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { provideHttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { NavBarComponent } from "./shared/nav-bar/nav-bar.component";
 
 @NgModule({
   declarations: [
@@ -15,8 +16,9 @@ import { CommonModule } from '@angular/common';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    CommonModule
-  ],
+    CommonModule,
+    NavBarComponent
+],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })

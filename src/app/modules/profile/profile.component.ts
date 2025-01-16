@@ -2,15 +2,16 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NavBarComponent } from "../../shared/nav-bar/nav-bar.component";
+import { BreadCrumbsComponent } from "../../shared/bread-crumbs/bread-crumbs.component";
 
 @Component({
   selector: 'app-perfil',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, NavBarComponent],
-  templateUrl: './perfil.component.html',
-  styleUrl: './perfil.component.scss'
+  imports: [ReactiveFormsModule, CommonModule, NavBarComponent, BreadCrumbsComponent],
+  templateUrl: './profile.component.html',
+  styleUrl: './profile.component.scss'
 })
-export class PerfilComponent implements OnInit {
+export class ProfileComponent implements OnInit {
   personalForm: FormGroup = new FormGroup({});
   addressForm: FormGroup = new FormGroup({});
   isPersonalEditing = false;

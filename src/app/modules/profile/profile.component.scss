@@ -2,7 +2,7 @@
 .profile{
   width: 100vw;
   height: 100vh;
-  background-color: #023047;
+  background-color: white;
 }
 .profile-container {
   max-width: 50rem;
@@ -86,7 +86,7 @@ input {
 
 input:focus {
   outline: none;
-  border-color: #66CDD9;
+  border-color: #0066ff;
 }
 
 .error {
@@ -105,7 +105,7 @@ input:focus {
 }
 
 .form-actions button {
-  background: #66CDD9;
+  background: #0066ff;
   color: white;
   border: none;
   padding: 0.75rem 2rem;
@@ -115,7 +115,7 @@ input:focus {
 }
 
 .form-actions button:hover {
-  background: #4FB3BE;
+  background: #0066ff;
 }
 
 .form-actions button:disabled {

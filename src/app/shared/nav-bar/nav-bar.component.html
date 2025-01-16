@@ -14,10 +14,10 @@
 
     <!-- Nav links -->
     <div class="nav-links" [class.active]="isMenuOpen">
-      <a href="dashboard">Início</a>
-      <a href="dashboard/order/create">Solicitar</a>
-      <a href="about">About</a>
-      <a class="perfil-menu" href="perfil" >Olá,Roberto</a>
+      <button class="bt-link" (click)="navigate('dashboard')">Início</button>
+      <button class="bt-link" (click)="navigate('dashboard/order/create')">Solicitar</button>
+      <button class="bt-link">About</button>
+      <button class="bt-link perfil-menu" (click)="navigate('perfil')">Olá, {{this.profileService.user()?.name | shotName}}</button>
     </div>
   </div>
 </nav>
