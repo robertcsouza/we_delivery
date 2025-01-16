@@ -46,6 +46,15 @@
   margin-bottom: 2rem;
 }
 
+.error-container{
+  height: 0.5rem;
+  .error-message{
+    color: #f02d3a;
+    font-size: medium;
+  }
+  margin-bottom: 1rem;
+}
+
 .form-group {
   margin-bottom: 1.5rem;
 }

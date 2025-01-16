@@ -11,8 +11,10 @@
     <div class="register-content">
       <h2 class="welcome-text">Welcome! 👋</h2>
       <h1 class="register-title">Create your account</h1>
-
-      <form >
+      <div class="error-container">
+        <span class="error-message">{{this.userService.loginError()}}</span>
+      </div>
+      <form [formGroup]="signupFormGroup" >
         <div class="form-group">
           <label for="name">Name</label>
           <input
@@ -96,13 +98,13 @@
               <i class="fas" [class.fa-eye]="!showConfirmPassword" [class.fa-eye-slash]="showConfirmPassword"></i>
             </button>
           </div>
-          <div *ngIf="signupFormGroup.get('confirmPassword')?.touched && signupFormGroup.errors?.['passwordMismatch']"
+          <div *ngIf="signupFormGroup.get('password')?.touched && signupFormGroup.value.password !== signupFormGroup.value.confirmPassword"
                class="error-message">
             Passwords do not match
           </div>
         </div>
 
-        <button type="submit" class="register-button" [disabled]="false">
+        <button type="submit" class="register-button" [disabled]="signupFormGroup.invalid" (click)="createAccount()">
           Create Account
         </button>
       </form>

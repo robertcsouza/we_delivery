@@ -39,9 +39,6 @@ export class LoginComponent {
       }
     }
 
-    teste(){
-      console.log(this.userService.loginError())
-    }
 
 
 
