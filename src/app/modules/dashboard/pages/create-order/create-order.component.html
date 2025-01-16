@@ -1,104 +1,173 @@
-<div class="create-order">
+<div class="create-order-container">
   <app-nav-bar></app-nav-bar>
-  <div class="container">
+  <div class="crumb-container">
+    <app-bread-crumbs></app-bread-crumbs>
+  </div>
+  <div class="form-container">
 
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Início</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><a href="dashboard">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">create-order</li>
-      </ol>
-    </nav>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <h2>Solicitar Entrega</h2>
 
+      <div class="form-grid">
+        <!-- Personal Information -->
+        <div class="form-section">
+          <h3>Informações Pessoais</h3>
 
-    <h2 class="title">Solicitar Uma entrega</h2>
-    <form>
-      <div class="card receiver">
-        <div class="card-title">
-          <h4>Informações do Recebedor</h4>
-          <button type="button" class="btn btn-outline-primary">editar</button>
+          <div class="form-field">
+            <label for="name">Nome Completo*</label>
+            <input
+              id="name"
+              type="text"
+              formControlName="name"
+              [class.error]="isFieldInvalid('name')">
+            <span class="error-message" *ngIf="isFieldInvalid('name')">
+              Nome é obrigatório
+            </span>
+          </div>
+
+          <div class="form-field">
+            <label for="cpf">CPF*</label>
+            <input
+              id="cpf"
+              type="text"
+              formControlName="cpf"
+              mask="000.000.000-00"
+              [class.error]="isFieldInvalid('cpf')">
+            <span class="error-message" *ngIf="isFieldInvalid('cpf')">
+              CPF inválido
+            </span>
+          </div>
+
+          <div class="form-field">
+            <label for="phone">Telefone*</label>
+            <input
+              id="phone"
+              type="text"
+              formControlName="phone"
+              mask="(00) 00000-0000"
+              [class.error]="isFieldInvalid('phone')">
+            <span class="error-message" *ngIf="isFieldInvalid('phone')">
+              Telefone inválido
+            </span>
+          </div>
         </div>
 
-        <div class="inputs">
-          <div class="form-group name-input">
-            <label class="input-label" for="exampleInputEmail1">Nome</label>
-            <input type="name" class="form-control" id="email" aria-describedby="input name" placeholder="Nome">
+        <!-- Physical Characteristics -->
+        <div class="form-section">
+          <h3>Características Físicas</h3>
+
+          <div class="form-field">
+            <label for="size">Tamanho*</label>
+            <select id="size" formControlName="size" [class.error]="isFieldInvalid('size')">
+              <option value="">Selecione</option>
+              <option value="P">P</option>
+              <option value="M">M</option>
+              <option value="G">G</option>
+            </select>
+            <span class="error-message" *ngIf="isFieldInvalid('size')">
+              Selecione um tamanho
+            </span>
           </div>
-          <div class="form-group name-input">
-            <label class="input-label" for="exampleInputEmail1">CPF</label>
-            <input type="name" class="form-control" id="email" aria-describedby="input name" placeholder="00.000.000-00">
-          </div>
-          <div class="form-group name-input">
-            <label class="input-label" for="exampleInputEmail1">Telefone</label>
-            <input type="name" class="form-control" id="email" aria-describedby="input name" placeholder="(69) 000000000">
+
+          <div class="form-field">
+            <label for="weight">Peso*</label>
+            <select id="weight" formControlName="weight" [class.error]="isFieldInvalid('weight')">
+              <option value="">Selecione</option>
+              <option value="P">P</option>
+              <option value="M">M</option>
+              <option value="G">G</option>
+            </select>
+            <span class="error-message" *ngIf="isFieldInvalid('weight')">
+              Selecione um peso
+            </span>
           </div>
         </div>
 
+        <!-- Address Information -->
+        <div class="form-section full-width">
+          <h3>Endereço para Entrega</h3>
+
+          <div class="form-field">
+            <label for="cep">CEP*</label>
+            <input
+              id="cep"
+              type="text"
+              formControlName="cep"
+              mask="00000-000"
+              (blur)="onCepBlur()"
+              [class.error]="isFieldInvalid('cep')">
+            <span class="error-message" *ngIf="isFieldInvalid('cep')">
+              CEP inválido
+            </span>
+          </div>
+
+          <div class="address-grid">
+            <div class="form-field">
+              <label for="street">Rua*</label>
+              <input
+                id="street"
+                type="text"
+                formControlName="street"
+                [class.error]="isFieldInvalid('street')">
+            </div>
+
+            <div class="form-field">
+              <label for="neighborhood">Bairro*</label>
+              <input
+                id="neighborhood"
+                type="text"
+                formControlName="neighborhood"
+                [class.error]="isFieldInvalid('neighborhood')">
+            </div>
+
+            <div class="form-field">
+              <label for="city">Cidade*</label>
+              <input
+                id="city"
+                type="text"
+                formControlName="city"
+                [class.error]="isFieldInvalid('city')">
+            </div>
+
+            <div class="form-field">
+              <label for="state">Estado*</label>
+              <input
+                id="state"
+                type="text"
+                formControlName="state"
+                [class.error]="isFieldInvalid('state')">
+            </div>
+
+            <div class="form-field">
+              <label for="country">País*</label>
+              <input
+                id="country"
+                type="text"
+                formControlName="country"
+                [class.error]="isFieldInvalid('country')">
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="form-section full-width">
+          <div class="form-field">
+            <label for="observation">Observação</label>
+            <textarea
+              id="observation"
+              formControlName="observation"
+              rows="4">
+            </textarea>
+          </div>
+        </div>
       </div>
 
-      <div class="card address">
-        <div class="card-title">
-          <h4>Informações da Encomenda</h4>
-          <button type="button" class="btn btn-outline-primary">editar</button>
-        </div>
-
-        <div class="inputs">
-          <div class="form-group name-input">
-            <label class="input-label" for="exampleInputEmail1">Tamanho</label>
-            <input type="text" class="form-control" id="street" aria-describedby="input street" placeholder="P,M,G">
-          </div>
-          <div class="form-group name-input">
-            <label class="input-label" for="exampleInputEmail1">Peso</label>
-            <input type="text" class="form-control" id="neighborhood" aria-describedby="input neighborhood" placeholder="P,M,G">
-          </div>
-          <div class="form-group name-input">
-            <label class="input-label" for="exampleInputEmail1">Para entrega</label>
-            <input type="text" class="form-control" id="city" aria-describedby="input City" placeholder="Porto Velho">
-          </div>
-          <div class="form-group name-input">
-            <label class="input-label" for="exampleInputEmail1">Observação</label>
-            <input type="text" class="form-control" id="city" aria-describedby="Estado" placeholder="RO">
-          </div>
-        </div>
+      <div class="form-actions">
+        <button type="submit" [disabled]="registrationForm.invalid || isSubmitting">
+          {{ isSubmitting ? 'Cadastrando...' : 'Cadastrar' }}
+        </button>
       </div>
-
-      <div class="card address">
-        <div class="card-title">
-          <h4>Endereço</h4>
-          <button type="button" class="btn btn-outline-primary">editar</button>
-        </div>
-
-        <div class="inputs">
-          <div class="form-group name-input">
-            <label class="input-label" for="exampleInputEmail1">Rua</label>
-            <input type="text" class="form-control" id="street" aria-describedby="input street" placeholder="Ex: Rua 1">
-          </div>
-          <div class="form-group name-input">
-            <label class="input-label" for="exampleInputEmail1">Bairro</label>
-            <input type="text" class="form-control" id="neighborhood" aria-describedby="input neighborhood" placeholder="Ex:Centro">
-          </div>
-          <div class="form-group name-input">
-            <label class="input-label" for="exampleInputEmail1">Cidade</label>
-            <input type="text" class="form-control" id="city" aria-describedby="input City" placeholder="Porto Velho">
-          </div>
-          <div class="form-group name-input">
-            <label class="input-label" for="exampleInputEmail1">Estado</label>
-            <input type="text" class="form-control" id="city" aria-describedby="Estado" placeholder="RO">
-          </div>
-          <div class="form-group name-input">
-            <label class="input-label" for="exampleInputEmail1">País</label>
-            <input type="text" class="form-control" id="country" aria-describedby="Pais" placeholder="BR">
-          </div>
-          <div class="form-group name-input">
-            <label class="input-label" for="exampleInputEmail1">CEP</label>
-            <input type="text" class="form-control" id="country" aria-describedby="postal code" placeholder="00.000-000">
-          </div>
-        </div>
-
-      </div>
-
-      <button  type="button" class="save-btn btn btn-primary">Solicitar Entrega</button>
-
     </form>
+  </div>
 
 </div>

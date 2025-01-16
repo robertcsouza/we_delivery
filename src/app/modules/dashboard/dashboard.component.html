@@ -1,33 +1,38 @@
 <div class="dashboard-container">
   <app-nav-bar></app-nav-bar>
-  <div class="container">
+  <div class="purchases-container">
+  <app-bread-crumbs></app-bread-crumbs>
+  <h1>Compras</h1>
 
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Início</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-      </ol>
-    </nav>
-
-
-    <div class="new-order">
-      <h2 class="my-orders">Seus Pedidos</h2>
-      <a href="dashboard/order/create" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Solictar Entrega</a>
-
+  <div class="search-bar">
+    <div class="search-input">
+      <i class="bi bi-search"></i>
+      <input type="text" placeholder="Buscar" >
     </div>
-
-    <div class="order-content">
-      <h4 class="order-title">5 pedidos feitos</h4>
-      <h4>em 2025</h4>
+    <div class="filter">
+      <button>
+        <i class="bi bi-funnel"></i>
+        Todas
+      </button>
+      <span class="purchase-count">2 compras</span>
     </div>
-
-    <div class="card-container">
-      <app-order-card></app-order-card>
-      <app-order-card></app-order-card>
-      <app-order-card></app-order-card>
-    </div>
-
-
   </div>
 
+
+  <div class="purchases-list">
+    <app-order-card></app-order-card>
+    <app-order-card></app-order-card>
+    <app-order-card></app-order-card>
+
+  </div>
 </div>
+</div>
+
+
+
+
+
+
+
+
+

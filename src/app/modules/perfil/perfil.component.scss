@@ -1,0 +1,158 @@
+
+.profile{
+  width: 100vw;
+  height: 100vh;
+  background-color: #023047;
+}
+.profile-container {
+  max-width: 50rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.profile-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+h2 {
+  color: #333;
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.edit-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid #66CDD9;
+  color: #66CDD9;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.edit-button:hover {
+  background: #66CDD9;
+  color: white;
+}
+
+.edit-button.active {
+  background: #ff4444;
+  border-color: #ff4444;
+  color: white;
+}
+
+.form-field {
+  margin-bottom: 1.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: #66CDD9;
+}
+
+.error {
+  border-color: #ff4444;
+}
+
+.error-message {
+  color: #ff4444;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.form-actions {
+  text-align: right;
+  margin-top: 2rem;
+}
+
+.form-actions button {
+  background: #66CDD9;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.form-actions button:hover {
+  background: #4FB3BE;
+}
+
+.form-actions button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.info-display {
+  padding: 1rem 0;
+}
+
+.info-row {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.info-row .label {
+  font-weight: 500;
+  width: 120px;
+  color: #666;
+}
+
+.info-row .value {
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info-row {
+    flex-direction: column;
+  }
+
+  .info-row .label {
+    width: auto;
+    margin-bottom: 0.25rem;
+  }
+}

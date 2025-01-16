@@ -1,0 +1,155 @@
+<app-nav-bar></app-nav-bar>
+<div class="profile" >
+
+
+<div class="profile-container">
+  <h1>Perfil</h1>
+
+  <!-- Personal Information Card -->
+  <div class="profile-card not-editable">
+    <div class="card-header">
+      <h3>Informação Pessoal</h3>
+      <i
+        [ngClass]="!isPersonalEditing?'bi bi-pencil':'bi bi-x'"
+        (click)="togglePersonalEdit()"
+        [class.active]="isPersonalEditing">
+      </i>
+      <!-- <button
+      class="edit-button"
+      (click)="togglePersonalEdit()"
+      [class.active]="isPersonalEditing">
+      <i class="bi bi-pencil"></i>
+      {{ isPersonalEditing ? 'Cancelar' : 'Editar' }}
+    </button> -->
+    </div>
+
+    <form [formGroup]="personalForm" *ngIf="isPersonalEditing" (ngSubmit)="savePersonal()">
+      <div class="form-field">
+        <label for="name">Nome Completo*</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          [class.error]="isFieldInvalid(personalForm, 'name')">
+        <span class="error-message" *ngIf="isFieldInvalid(personalForm, 'name')">
+          Nome é obrigatório
+        </span>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="personalForm.invalid || isSaving">
+          {{ isSaving ? 'Salvando...' : 'Salvar Alterações' }}
+        </button>
+      </div>
+    </form>
+
+    <div class="info-display" *ngIf="!isPersonalEditing">
+
+      <div class="info-row">
+        <h2>Roberto Chaves Souza</h2>
+      </div>
+      <div class="info-row">
+        <h3>{{"roberto@gmail.com"}}</h3>
+      </div>
+      <div class="info-row">
+        <h3>CPF 033.055.433-66</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Address Card -->
+  <div class="profile-card">
+    <div class="card-header">
+      <h2>Endereço</h2>
+      <i
+        [ngClass]="!isAddressEditing ?'bi bi-pencil':'bi bi-x'"
+        (click)="toggleAddressEdit()"
+        [class.active]="isAddressEditing">
+      </i>
+      <!-- <button
+        class="edit-button"
+        (click)="toggleAddressEdit()"
+        [class.active]="isAddressEditing">
+        <i class="fas fa-pencil-alt"></i>
+        {{ isAddressEditing ? 'Cancelar' : 'Editar' }}
+      </button> -->
+    </div>
+
+    <form [formGroup]="addressForm" *ngIf="isAddressEditing" (ngSubmit)="saveAddress()">
+      <div class="form-field">
+        <label for="cep">CEP*</label>
+        <input
+          id="cep"
+          type="text"
+          formControlName="cep"
+          mask="00000-000"
+          (blur)="onCepBlur()"
+          [class.error]="isFieldInvalid(addressForm, 'cep')">
+      </div>
+
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="street">Rua*</label>
+          <input
+            id="street"
+            type="text"
+            formControlName="street"
+            [class.error]="isFieldInvalid(addressForm, 'street')">
+        </div>
+
+        <div class="form-field">
+          <label for="neighborhood">Bairro*</label>
+          <input
+            id="neighborhood"
+            type="text"
+            formControlName="neighborhood"
+            [class.error]="isFieldInvalid(addressForm, 'neighborhood')">
+        </div>
+
+        <div class="form-field">
+          <label for="city">Cidade*</label>
+          <input
+            id="city"
+            type="text"
+            formControlName="city"
+            [class.error]="isFieldInvalid(addressForm, 'city')">
+        </div>
+
+        <div class="form-field">
+          <label for="state">Estado*</label>
+          <input
+            id="state"
+            type="text"
+            formControlName="state"
+            [class.error]="isFieldInvalid(addressForm, 'state')">
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="addressForm.invalid || isSaving">
+          {{ isSaving ? 'Salvando...' : 'Salvar Alterações' }}
+        </button>
+      </div>
+    </form>
+
+    <div class="info-display" *ngIf="!isAddressEditing">
+      <div class="info-row">
+        <span class="label">CEP:</span>
+        <span class="value">{{ addressForm.get('cep')?.value }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Endereço:</span>
+        <span class="value">{{ addressForm.get('street')?.value }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Bairro:</span>
+        <span class="value">{{ addressForm.get('neighborhood')?.value }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Cidade/Estado:</span>
+        <span class="value">{{ addressForm.get('city')?.value }}/{{ addressForm.get('state')?.value }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

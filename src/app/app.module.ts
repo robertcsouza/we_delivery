@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { provideHttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { provideHttpClient } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    CommonModule
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

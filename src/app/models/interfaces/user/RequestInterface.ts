@@ -6,14 +6,10 @@ export interface AuthRequest {
 }
 
 export interface RegisterRequest {
-  _id: string
   name: string
   email: string
   password: string
   cpf: string
-  tel: string
-  whats_app: string
-  disabled: boolean
 }
 
 

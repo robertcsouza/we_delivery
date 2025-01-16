@@ -1,27 +1,113 @@
 <div class="register-container">
-
-  <div class="login-card shadow-sm p-3 mb-5 bg-white rounded">
-    <h1 class="title" >Cadastre-se</h1>
-
-    <div class="input user">
-      <label for="typeahead-basic">Email</label>
-      <input id="typeahead-basic" type="text" class="form-control"/>
+  <app-nav-bar></app-nav-bar>
+  <div class="register-card">
+    <div class="top-bar">
+      <span class="login-text">
+        Already registered?
+        <a href="/login" class="login-link">Login to your account</a>
+      </span>
     </div>
 
-    <div class="input password">
-      <label for="typeahead-basic">Senha</label>
-      <input id="typeahead-basic" type="password" class="form-control"/>
+    <div class="register-content">
+      <h2 class="welcome-text">Welcome! 👋</h2>
+      <h1 class="register-title">Create your account</h1>
+      <div class="error-container">
+        <span class="error-message">{{this.userService.loginError()}}</span>
+      </div>
+      <form [formGroup]="signupFormGroup" >
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            placeholder="John Doe"
+            class="form-control"
+          />
+          <div *ngIf="signupFormGroup.get('name')?.touched && signupFormGroup.get('name')?.invalid"
+               class="error-message">
+            <span *ngIf="signupFormGroup.get('name')?.errors?.['required']">Name is required</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cpf">CPF</label>
+          <input
+            type="text"
+            id="cpf"
+            formControlName="cpf"
+            placeholder="000.000.000-00"
+            class="form-control"
+            maxlength="14"
+          />
+          <div *ngIf="signupFormGroup.get('cpf')?.touched && signupFormGroup.get('cpf')?.invalid"
+               class="error-message">
+            <span *ngIf="signupFormGroup.get('cpf')?.errors?.['required']">CPF is required</span>
+            <span *ngIf="signupFormGroup.get('cpf')?.errors?.['invalidCpf']">Invalid CPF format</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="johndoe@gmail.com"
+            class="form-control"
+          />
+          <div *ngIf="signupFormGroup.get('email')?.touched && signupFormGroup.get('email')?.invalid"
+               class="error-message">
+            <span *ngIf="signupFormGroup.get('email')?.errors?.['required']">Email is required</span>
+            <span *ngIf="signupFormGroup.get('email')?.errors?.['email']">Invalid email format</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-input-container">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              id="password"
+              formControlName="password"
+              placeholder="Enter password"
+              class="form-control"
+            />
+            <button type="button" class="toggle-password" >
+              <i class="fas" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
+            </button>
+          </div>
+          <div *ngIf="signupFormGroup.get('password')?.touched && signupFormGroup.get('password')?.invalid"
+               class="error-message">
+            <span *ngIf="signupFormGroup.get('password')?.errors?.['required']">Password is required</span>
+            <span *ngIf="signupFormGroup.get('password')?.errors?.['minlength']">Password must be at least 6 characters</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Repeat Password</label>
+          <div class="password-input-container">
+            <input
+              [type]="showConfirmPassword ? 'text' : 'password'"
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              placeholder="Repeat password"
+              class="form-control"
+            />
+            <button type="button" class="toggle-password" >
+              <i class="fas" [class.fa-eye]="!showConfirmPassword" [class.fa-eye-slash]="showConfirmPassword"></i>
+            </button>
+          </div>
+          <div *ngIf="signupFormGroup.get('password')?.touched && signupFormGroup.value.password !== signupFormGroup.value.confirmPassword"
+               class="error-message">
+            Passwords do not match
+          </div>
+        </div>
+
+        <button type="submit" class="register-button" [disabled]="signupFormGroup.invalid" (click)="createAccount()">
+          Create Account
+        </button>
+      </form>
     </div>
-
-    <div class="input password">
-      <label for="typeahead-basic">Repita a Senha</label>
-      <input id="typeahead-basic" type="password" class="form-control"/>
-    </div>
-
-    <button type="button" class="btn btn-primary bt-login">entrar</button>
-
-    <div class="register"><p>Já tem uma conta?</p><a href="login" class="login-link">Entrar</a></div>
-
   </div>
-
 </div>

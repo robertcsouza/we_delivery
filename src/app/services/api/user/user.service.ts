@@ -1,104 +1,92 @@
 
-import {  inject, Injectable } from '@angular/core';
+import {  inject, Injectable, input, signal, WritableSignal } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
-import { AuthAction, AuthRequest, AuthResponse } from '../../../models/interfaces/user/RequestInterface';
-import { catchError, EMPTY, map, Observable, of, Subject, switchMap, take, tap } from 'rxjs';
+import { AuthAction, AuthRequest, AuthResponse, RegisterRequest } from '../../../models/interfaces/user/RequestInterface';
+import {catchError, EMPTY, map, Observable, of, OperatorFunction, Subject, switchMap, tap,} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import {toSignal} from '@angular/core/rxjs-interop'
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop'
 import { Router } from '@angular/router';
-import { Action } from 'src/app/models/enums/UserEnums';
+import { Effect } from 'src/app/models/interfaces/effects/EffectInterface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService implements Effect {
   private readonly API_URL = environment.API_URL
-  constructor() { }
   private readonly http:HttpClient = inject(HttpClient)
   private readonly cookie:CookieService = inject(CookieService)
   private readonly router:Router = inject(Router)
 
-  authenticateUser$ = new Subject()
-  auth$ = new Observable()
-  logiError = toSignal(this.authenticateUser$.pipe(switchMap((_)=>this.auth$)),{initialValue:null})
+  constructor() { }
 
-  public login(request:AuthRequest){
-    this.authenticateUser$.next(
-     this.authActions({action:Action.LOGIN,body:request})
+  loginError = signal<string|undefined>(undefined)
+  registerError = signal<string|undefined>(undefined)
+
+  public login = this.effect(switchMap((input:AuthRequest)=>this._login(input)),this.loginError)
+
+  public singUp = this.effect(switchMap((input:RegisterRequest)=>this._register(input)),this.registerError)
+
+
+
+  effect<T, U>(fn: OperatorFunction<T, U>, errorSignal?: WritableSignal<string | undefined>): (input: T) => void {
+
+    const subject = new Subject<T>()
+    subject.pipe(
+      fn,
+      takeUntilDestroyed()
+    ).subscribe()
+    return (input)=>{
+        subject.next(input)
+    }
+  }
+
+
+
+
+  private _login(authRequest:AuthRequest){
+   return  this.http.post<AuthResponse>(`${this.API_URL}/user/login`,authRequest).pipe(
+    tap({
+      next:(response)=>{
+        console.log(response)
+        this.cookie.delete('bearer')
+        this.cookie.set('bearer',response.data)
+        this.router.navigate(['/dashboard'])
+      },
+
+    }),
+    catchError((err)=>{
+      console.log(err.error.detail)
+      this.loginError.set(err.error.detail)
+      return EMPTY
+    })
     )
   }
 
-  public register(request:AuthRequest){
-    this.authenticateUser$.next(
-     this.authActions({action:Action.REGISTER,body:request})
-    )
-  }
+  private _register(register:RegisterRequest){
+    console.log(register)
+   return  this.http.post<AuthResponse>(`${this.API_URL}/user/register`,register).pipe(
+    tap({
+      next:(response)=>{
+        console.log(response)
+        this.cookie.delete('bearer')
+        this.cookie.set('bearer',response.data)
+        this.router.navigate(['/dashboard'])
+      },
 
-  private authActions(params:AuthAction){
-    switch(params.action){
-      case Action.LOGIN:
-        this.auth$ = this.authenticateRequest(params.body)
-        break;
-      case Action.REGISTER:
-        this.auth$ = this.registerRequest(params.body)
-        break;
-      default:
-        this.auth$ = EMPTY;
-      }
-
-  }
-
-
-
-
-
-  private authenticateRequest(request:AuthRequest){
-    return this.http.post<AuthResponse>(`${this.API_URL}/user/login`,request).pipe(
-      tap({
-        next:(response)=>{
-          if(response.status ===  'success'){
-            this.cookie.delete('bearer')
-            this.cookie.set('bearer',response.data)
-            this.router.navigate(['/dashboard'])
-          }
-          return EMPTY
-        }
-      }),
-
-      map((response)=>{
-        if(response.status ===  'success')  return null
-        return response.data
-      } )
-    )
-  }
-
-  private registerRequest(request:AuthRequest){
-    return this.http.post<AuthResponse>(`${this.API_URL}/user/register`,request).pipe(
-      tap({
-        next:(response)=>{
-          if(response.status ===  'success'){
-            this.router.navigate(['/login'])
-          }
-          return EMPTY
-        }
-      }),
-
-      map((response)=>{
-        if(response.status ===  'success')  return null
-        return response.data
-      } )
+    }),
+    catchError((err)=>{
+      console.log(err.error.detail)
+      this.loginError.set(err.error.detail)
+      return EMPTY
+    })
     )
   }
 
   isLoggedIn(): boolean {
     const JWT_TOKEN = this.cookie.get('bearer');
-    return JWT_TOKEN ? true : false;
+    return !!JWT_TOKEN ;
   }
-
-
-
-
 
 }
 
