@@ -12,7 +12,9 @@
     <div class="login-content">
       <h2 class="welcome-text">Bem vindo de volta! 👋</h2>
       <h1 class="login-title">Entre com sua conta</h1>
-
+      <div class="error-container">
+        <span class="error-message">{{this.userService.loginError()}}</span>
+      </div>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="email">Email</label>

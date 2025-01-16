@@ -44,7 +44,16 @@
   font-size: 1.5rem;
   font-weight: 600;
   color: #1e293b;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+}
+
+.error-container{
+  height: 0.5rem;
+  .error-message{
+    color: #f02d3a;
+    font-size: medium;
+  }
+  margin-bottom: 1rem;
 }
 
 .form-group {

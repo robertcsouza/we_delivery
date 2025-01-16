@@ -34,9 +34,13 @@ export class LoginComponent {
 
     onSubmit() {
       if (this.loginForm.valid) {
-        console.log('Form submitted:', this.loginForm.value);
-        //this.userService.login(this.loginForm.value as AuthRequest)
+        this.userService.login(this.loginForm.value as AuthRequest)
+
       }
+    }
+
+    teste(){
+      console.log(this.userService.loginError())
     }
 
 

@@ -22,9 +22,9 @@
             placeholder="John Doe"
             class="form-control"
           />
-          <div *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.invalid"
+          <div *ngIf="signupFormGroup.get('name')?.touched && signupFormGroup.get('name')?.invalid"
                class="error-message">
-            <span *ngIf="registerForm.get('name')?.errors?.['required']">Name is required</span>
+            <span *ngIf="signupFormGroup.get('name')?.errors?.['required']">Name is required</span>
           </div>
         </div>
 
@@ -38,10 +38,10 @@
             class="form-control"
             maxlength="14"
           />
-          <div *ngIf="registerForm.get('cpf')?.touched && registerForm.get('cpf')?.invalid"
+          <div *ngIf="signupFormGroup.get('cpf')?.touched && signupFormGroup.get('cpf')?.invalid"
                class="error-message">
-            <span *ngIf="registerForm.get('cpf')?.errors?.['required']">CPF is required</span>
-            <span *ngIf="registerForm.get('cpf')?.errors?.['invalidCpf']">Invalid CPF format</span>
+            <span *ngIf="signupFormGroup.get('cpf')?.errors?.['required']">CPF is required</span>
+            <span *ngIf="signupFormGroup.get('cpf')?.errors?.['invalidCpf']">Invalid CPF format</span>
           </div>
         </div>
 
@@ -54,10 +54,10 @@
             placeholder="johndoe@gmail.com"
             class="form-control"
           />
-          <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid"
+          <div *ngIf="signupFormGroup.get('email')?.touched && signupFormGroup.get('email')?.invalid"
                class="error-message">
-            <span *ngIf="registerForm.get('email')?.errors?.['required']">Email is required</span>
-            <span *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format</span>
+            <span *ngIf="signupFormGroup.get('email')?.errors?.['required']">Email is required</span>
+            <span *ngIf="signupFormGroup.get('email')?.errors?.['email']">Invalid email format</span>
           </div>
         </div>
 
@@ -75,10 +75,10 @@
               <i class="fas" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
             </button>
           </div>
-          <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid"
+          <div *ngIf="signupFormGroup.get('password')?.touched && signupFormGroup.get('password')?.invalid"
                class="error-message">
-            <span *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</span>
-            <span *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters</span>
+            <span *ngIf="signupFormGroup.get('password')?.errors?.['required']">Password is required</span>
+            <span *ngIf="signupFormGroup.get('password')?.errors?.['minlength']">Password must be at least 6 characters</span>
           </div>
         </div>
 
@@ -96,7 +96,7 @@
               <i class="fas" [class.fa-eye]="!showConfirmPassword" [class.fa-eye-slash]="showConfirmPassword"></i>
             </button>
           </div>
-          <div *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.errors?.['passwordMismatch']"
+          <div *ngIf="signupFormGroup.get('confirmPassword')?.touched && signupFormGroup.errors?.['passwordMismatch']"
                class="error-message">
             Passwords do not match
           </div>

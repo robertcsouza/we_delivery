@@ -3,39 +3,43 @@ import {  inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
 import { AuthAction, AuthRequest, AuthResponse } from '../../../models/interfaces/user/RequestInterface';
-import { BehaviorSubject, catchError, EMPTY, map, Observable, of, OperatorFunction, Subject, switchMap, take, tap } from 'rxjs';
+import {map, Observable, of, OperatorFunction, Subject, switchMap, tap,} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import {takeUntilDestroyed, toSignal} from '@angular/core/rxjs-interop'
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop'
 import { Router } from '@angular/router';
-import { Action } from 'src/app/models/enums/UserEnums';
-type SortDirection = 'ASC' | 'DESC';
+import { Effect } from 'src/app/models/interfaces/effects/EffectInterface';
+
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService implements Effect {
   private readonly API_URL = environment.API_URL
-  constructor() { }
   private readonly http:HttpClient = inject(HttpClient)
   private readonly cookie:CookieService = inject(CookieService)
   private readonly router:Router = inject(Router)
 
+  constructor() { }
+
   loginError = signal<string|undefined>(undefined)
 
-  public login = this.effect(switchMap((input:string)=>this._login(input)),this.loginError)
+  public login = this.effect(switchMap((input:AuthRequest)=>this._login(input)),this.loginError)
 
-  dologin(){
-    this.login('qualquer coisa')
-  }
-
-  effect<T,U>(fn: OperatorFunction<T, U>,errorSignal?:WritableSignal<string | undefined>):(input:T)=> void{
+  effect<T, U>(fn: OperatorFunction<T, U>, errorSignal?: WritableSignal<string | undefined>): (input: T) => void {
     const subject = new Subject<T>()
     subject.pipe(
       fn,
       takeUntilDestroyed()
     ).subscribe(
       {
+        next:(response)=>{
+          console.log(response)
+          this.cookie.delete('bearer')
+          this.cookie.set('bearer',response as string)
+          this.router.navigate(['/dashboard'])
+        },
         error:(err)=>{
-          errorSignal?.set(err)
+          console.log(err.error.detail)
+          this.loginError.set(err.error.detail)
         }
       }
     )
@@ -44,26 +48,15 @@ export class UserService {
     }
   }
 
-
-
-  private _login(userName:string){
-    //requisiçao pra api
-   return  of(`retorno do login`).pipe(
-      map(()=>{throw 'erro no pipe'})
+  private _login(authRequest:AuthRequest){
+   return  this.http.post<AuthResponse>(`${this.API_URL}/user/login`,authRequest).pipe(
+    map((response)=> response.data)
     )
   }
 
-
-
-
-
-
-
-
-
   isLoggedIn(): boolean {
     const JWT_TOKEN = this.cookie.get('bearer');
-    return JWT_TOKEN ? true : false;
+    return !!JWT_TOKEN ;
   }
 
 }

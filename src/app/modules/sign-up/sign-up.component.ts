@@ -1,12 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NavBarComponent } from 'src/app/shared/nav-bar/nav-bar.component';
 
 @Component({
     selector: 'app-sign-up',
     templateUrl: './sign-up.component.html',
     styleUrls: ['./sign-up.component.scss'],
-    imports:[NavBarComponent],
+    imports:[NavBarComponent,CommonModule,ReactiveFormsModule],
     standalone: true
 })
 export class SignUpComponent implements OnInit {
