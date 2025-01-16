@@ -1,6 +1,5 @@
 .navbar {
-  background-color: #33658a;
-  padding: 1rem 2rem;
+  background-color: #023047;
   position: fixed;
   width: 100%;
   top: 0;
@@ -18,11 +17,17 @@
 
 }
 
+
 .logo {
+  width: 3rem;
+  height: 3rem;
+}
+.logo-name {
   color: white;
   text-decoration: none;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  margin-left: 1rem;
   letter-spacing: 1px;
 }
 
@@ -45,7 +50,7 @@
 }
 
 .nav-links a:hover {
-  color: #3483fa;
+  color: #778da9 ;
 }
 
 .contact-btn {

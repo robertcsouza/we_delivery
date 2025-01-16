@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { NavBarComponent } from "../../../../shared/nav-bar/nav-bar.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { BreadCrumbsComponent } from "../../../../shared/bread-crumbs/bread-crumbs.component";
 
 @Component({
   selector: 'app-create-order',
   standalone:true,
-  imports: [NavBarComponent,ReactiveFormsModule, CommonModule],
+  imports: [NavBarComponent, ReactiveFormsModule, CommonModule, BreadCrumbsComponent],
   templateUrl: './create-order.component.html',
   styleUrl: './create-order.component.scss'
 })

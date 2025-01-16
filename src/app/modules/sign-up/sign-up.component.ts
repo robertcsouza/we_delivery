@@ -1,11 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NavBarComponent } from 'src/app/shared/nav-bar/nav-bar.component';
 
 @Component({
     selector: 'app-sign-up',
     templateUrl: './sign-up.component.html',
     styleUrls: ['./sign-up.component.scss'],
-    standalone: false
+    imports:[NavBarComponent],
+    standalone: true
 })
 export class SignUpComponent implements OnInit {
   showPassword = false;

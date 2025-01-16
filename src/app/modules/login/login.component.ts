@@ -22,13 +22,6 @@ export class LoginComponent {
   togglePassword() {
     this.showPassword = !this.showPassword;
   }
-
-  onSubmit() {
-    if (this.loginForm.valid) {
-      console.log('Form submitted:', this.loginForm.value);
-      // Add your login logic here
-    }
-  }
   private readonly formBuilder:FormBuilder = inject(FormBuilder)
   readonly userService: UserService = inject(UserService)
   private readonly cookieService: CookieService = inject(CookieService)
@@ -39,10 +32,13 @@ export class LoginComponent {
       password:['',Validators.required]
     })
 
-    onHandleSubmitForm():void {
-        this.userService.dologin()
-        // this.userService.login(this.loginForm.value as AuthRequest)
+    onSubmit() {
+      if (this.loginForm.valid) {
+        console.log('Form submitted:', this.loginForm.value);
+        //this.userService.login(this.loginForm.value as AuthRequest)
+      }
     }
+
 
 
 }

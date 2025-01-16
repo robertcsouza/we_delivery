@@ -3,6 +3,7 @@ import { NavBarComponent } from "../../shared/nav-bar/nav-bar.component";
 import { OrderCardComponent } from "./components/order-card/order-card.component";
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from 'src/app/shared/footer/footer.component';
+import { BreadCrumbsComponent } from "../../shared/bread-crumbs/bread-crumbs.component";
 
 interface Purchase {
   id: number;
@@ -24,7 +25,7 @@ interface Purchase {
 @Component({
   selector: 'app-dashboard',
   standalone:true,
-  imports: [NavBarComponent, OrderCardComponent,CommonModule,FooterComponent],
+  imports: [NavBarComponent, OrderCardComponent, CommonModule, FooterComponent, BreadCrumbsComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
