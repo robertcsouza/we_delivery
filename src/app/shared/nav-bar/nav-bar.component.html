@@ -1,8 +1,7 @@
-<nav class="navbar">
+<nav class=" navbar navbar-expand-lg fixed-top">
   <div class="navbar-container">
     <div class="logo-container">
-      <img src="assets/logo.png" alt="logo" class="logo">
-      <a href="#" class="logo-name">Nos recebemos</a>
+      <a href="#" class="navbar-brand">Nos recebemos</a>
     </div>
 
     <!-- Mobile menu button -->
@@ -14,10 +13,12 @@
 
     <!-- Nav links -->
     <div class="nav-links" [class.active]="isMenuOpen">
-      <button class="bt-link" (click)="navigate('dashboard')">Início</button>
-      <button class="bt-link" (click)="navigate('dashboard/order/create')">Solicitar</button>
-      <button class="bt-link">About</button>
-      <button class="bt-link perfil-menu" (click)="navigate('perfil')">Olá, {{this.profileService.user()?.name | shotName}}</button>
+      <button class="bt-link" (click)="navigate('dashboard')"><i class="bi bi-house"></i>  Início</button>
+      <button class="bt-link" (click)="navigate('dashboard/order/create')"><i class="bi bi-file-earmark-plus"></i> Solicitar</button>
+      <button class="bt-link"><i class="bi bi-compass"></i> About</button>
+      <button *ngIf="is_logged_in" class="bt-link perfil-menu" (click)="navigate('perfil')">Olá, {{this.profileService.user()?.name | shotName}}</button>
+      <button *ngIf="!is_logged_in" type="button" class="btn btn-login btn-round btn-sm" (click)="navigate('register')" >Cadastre-se</button>
+      <button *ngIf="!is_logged_in" type="button" class="btn btn-register btn-outline btn-round btn-sm" (click)="navigate('login')">entrar</button>
     </div>
   </div>
 </nav>

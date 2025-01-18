@@ -1,9 +1,10 @@
+@import 'src/assets/local_css/_variables.scss';
 .purchase-card {
   background: white;
   border-radius: 0.5rem;
   padding: 1rem;
   margin-bottom: 1rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: $card-shadow;
   display: flex;
   justify-content: space-between;
   gap: 1.5rem;

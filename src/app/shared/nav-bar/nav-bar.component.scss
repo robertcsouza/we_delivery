@@ -1,10 +1,19 @@
+@import 'src/assets/local_css/_variables.scss';
 .navbar {
-  background-color: #023047;
+  background-color: $primary-color;
+  height: 4.5rem;
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 1000;
+  box-shadow: 0 6px 10px -4px #00000026;
+}
+
+.navbar-transparent {
+  background-color: transparent;
+  color: white;
+  box-shadow: none;
 }
 
 .navbar-container {
@@ -15,6 +24,20 @@
   justify-content: space-between;
   align-items: center;
 
+}
+
+.logo-container{
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-weight: 600;
+  margin: 5px 0px;
+  padding: 20px 15px;
+  font-size: 14px;
+  color: white;
+  text-transform: uppercase;
 }
 
 
@@ -34,18 +57,36 @@
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   .bt-link{
     background-color: transparent;
     border: none;
     color: white;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
     transition: color 0.3s ease;
   }
   .bt-link:hover {
-    color: #778da9 ;
+    color: $dark-gray ;
   }
+
+  .btn-register{
+    background-color: transparent;
+    border-color:$danger-color-ligth ;
+  }
+  .btn-register:hover{
+    background-color: $danger-color-ligth;
+  }
+  .btn-login{
+    background-color: white;
+    color: $danger-color-ligth;
+    border-color: transparent;
+  }
+  .btn-login:hover{
+    border-color: $danger-color-ligth;
+  }
+
 }
 
 

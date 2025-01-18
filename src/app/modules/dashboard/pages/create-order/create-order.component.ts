@@ -3,6 +3,7 @@ import { NavBarComponent } from "../../../../shared/nav-bar/nav-bar.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BreadCrumbsComponent } from "../../../../shared/bread-crumbs/bread-crumbs.component";
+import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
 
 @Component({
   selector: 'app-create-order',
@@ -14,16 +15,19 @@ import { BreadCrumbsComponent } from "../../../../shared/bread-crumbs/bread-crum
 export class CreateOrderComponent {
   registrationForm: FormGroup = new FormGroup({});
   isSubmitting = false;
+  state_default: boolean = true;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.registrationForm = this.fb.group({
       name: ['', [Validators.required]],
+      product_name: ['', [Validators.required]],
       cpf: ['', [Validators.required, this.validateCPF]],
       phone: ['', [Validators.required]],
       size: ['', [Validators.required]],
       weight: ['', [Validators.required]],
+      to_delivery: [false, [Validators.required]],
       cep: ['', [Validators.required]],
       street: ['', [Validators.required]],
       neighborhood: ['', [Validators.required]],

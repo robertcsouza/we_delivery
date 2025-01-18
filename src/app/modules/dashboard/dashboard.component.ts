@@ -34,6 +34,7 @@ interface Purchase {
 export class DashboardComponent {
   searchText: string = '';
   pendingReviews: number = 9;
+  focus: any;
   purchases: Purchase[] = [
     {
       id: 1,

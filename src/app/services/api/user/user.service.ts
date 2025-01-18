@@ -22,7 +22,6 @@ export class UserService implements Effect {
 
   loginError = signal<string|undefined>(undefined)
   registerError = signal<string|undefined>(undefined)
-
   public login = this.effect(switchMap((input:AuthRequest)=>this._login(input)),this.loginError)
 
   public singUp = this.effect(switchMap((input:RegisterRequest)=>this._register(input)),this.registerError)
