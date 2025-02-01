@@ -26,9 +26,18 @@ export interface UserData {
   tel: any
   whats_app: any
   is_admin: boolean
-  address: any
+  address: Address
 }
 
+
+export interface Address {
+  street: string
+  neighborhood: string
+  city: string
+  state: string
+  country: string
+  postal_code: string
+}
 
 export interface AuthAction {
   action: Action;
@@ -41,7 +50,7 @@ export interface AuthAction {
 export interface AuthResponse {
   message: string;
   status: string;
-  data: string;
+  data: any;
 }
 
 

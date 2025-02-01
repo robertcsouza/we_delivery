@@ -7,6 +7,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { provideHttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { NavBarComponent } from "./shared/nav-bar/nav-bar.component";
+import { NgxsModule } from '@ngxs/store';
+import { ProfileState } from './services/profile/state/profile.state';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +20,9 @@ import { NavBarComponent } from "./shared/nav-bar/nav-bar.component";
     AppRoutingModule,
     NgbModule,
     CommonModule,
-    NavBarComponent
+    NavBarComponent,
+    NgxsModule.forRoot([ProfileState])
+
 ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterRequest } from 'src/app/models/interfaces/user/RequestInterface';
-import { UserService } from 'src/app/services/api/user/user.service';
+import { UserService } from 'src/app/services/user/user.service';
+
 import { NavBarComponent } from 'src/app/shared/nav-bar/nav-bar.component';
 
 @Component({

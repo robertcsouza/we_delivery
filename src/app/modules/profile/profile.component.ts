@@ -1,8 +1,10 @@
+import { state } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit, effect, runInInjectionContext, Injector } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NavBarComponent } from "../../shared/nav-bar/nav-bar.component";
 import { BreadCrumbsComponent } from "../../shared/bread-crumbs/bread-crumbs.component";
+import { ProfileService } from 'src/app/services/profile/profile.service';
 
 @Component({
   selector: 'app-perfil',
@@ -12,28 +14,48 @@ import { BreadCrumbsComponent } from "../../shared/bread-crumbs/bread-crumbs.com
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit {
+  readonly profileService:ProfileService = inject(ProfileService)
   personalForm: FormGroup = new FormGroup({});
   addressForm: FormGroup = new FormGroup({});
   isPersonalEditing = false;
   isAddressEditing = false;
   isSaving = false;
 
-  constructor(private fb: FormBuilder) {}
-
+  constructor() {}
+  fromBuild:FormBuilder = inject(FormBuilder)
+  injector = inject(Injector);
   ngOnInit() {
-    // Initialize with mock data
-    this.personalForm = this.fb.group({
-      name: ['João da Silva', [Validators.required]]
-    });
+    this.profileService.getUser()
+    runInInjectionContext(this.injector, () => {
+      effect(() => {
+        this.personalForm = this.fromBuild.group({
+          name: [this.profileService.user().name, [Validators.required]],
+          tel: [this.profileService.user().tel, [Validators.required]],
+          whats_app: [this.profileService.user().whats_app, [Validators.required]]
+        });
 
-    this.addressForm = this.fb.group({
-      cep: ['12345-678', [Validators.required]],
-      street: ['Rua das Flores, 123', [Validators.required]],
-      neighborhood: ['Centro', [Validators.required]],
-      city: ['São Paulo', [Validators.required]],
-      state: ['SP', [Validators.required]]
+        this.addressForm = this.fromBuild.group({
+          postal_code: [this.profileService.user().address.postal_code, [Validators.required]],
+          street: [this.profileService.user().address.street, [Validators.required]],
+          neighborhood: [this.profileService.user().address.neighborhood, [Validators.required]],
+          city: [this.profileService.user().address.city, [Validators.required]],
+          state: [this.profileService.user().address.state, [Validators.required]],
+          country: [this.profileService.user().address.country, [Validators.required]]
+        });
+      });
     });
   }
+
+
+
+  async savePersonal() {
+    this.profileService.updateUser(this.personalForm.value)
+  }
+
+  async saveAddress() {
+    this.profileService.updateAddress(this.addressForm.value)
+
+}
 
   togglePersonalEdit() {
     this.isPersonalEditing = !this.isPersonalEditing;
@@ -61,36 +83,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  async savePersonal() {
-    if (this.personalForm.valid) {
-      this.isSaving = true;
-      try {
-        // Implement save logic
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Mock API call
-        this.isPersonalEditing = false;
-        alert('Informações pessoais atualizadas com sucesso!');
-      } catch (error) {
-        alert('Erro ao salvar alterações. Tente novamente.');
-      } finally {
-        this.isSaving = false;
-      }
-    }
-  }
 
-  async saveAddress() {
-    if (this.addressForm.valid) {
-      this.isSaving = true;
-      try {
-        // Implement save logic
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Mock API call
-        this.isAddressEditing = false;
-        alert('Endereço atualizado com sucesso!');
-      } catch (error) {
-        alert('Erro ao salvar alterações. Tente novamente.');
-      } finally {
-        this.isSaving = false;
-      }
-    }
-}
+
 }
 

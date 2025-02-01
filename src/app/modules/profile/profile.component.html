@@ -4,41 +4,48 @@
   <div class="profile-container">
   <app-bread-crumbs></app-bread-crumbs>
 
-  <h1>Perfil</h1>
+  <h3>Perfil</h3>
+  <div>{{this.profileService.user().name}}</div>
   <!-- Personal Information Card -->
   <div class="profile-card not-editable">
     <div class="card-header">
-      <h3>Informação Pessoal</h3>
+      <h5>Suas Informações</h5>
       <i
         [ngClass]="!isPersonalEditing?'bi bi-pencil':'bi bi-x'"
         (click)="togglePersonalEdit()"
         (keydown)="togglePersonalEdit()"
         [class.active]="isPersonalEditing">
       </i>
-      <!-- <button
-      class="edit-button"
-      (click)="togglePersonalEdit()"
-      [class.active]="isPersonalEditing">
-      <i class="bi bi-pencil"></i>
-      {{ isPersonalEditing ? 'Cancelar' : 'Editar' }}
-    </button> -->
     </div>
 
-    <form [formGroup]="personalForm" *ngIf="isPersonalEditing" (ngSubmit)="savePersonal()">
-      <div class="form-field">
-        <label for="name">Nome Completo*</label>
-        <input
-          id="name"
-          type="text"
-          formControlName="name"
-          [class.error]="isFieldInvalid(personalForm, 'name')">
-        <span class="error-message" *ngIf="isFieldInvalid(personalForm, 'name')">
-          Nome é obrigatório
-        </span>
+    <form [formGroup]="personalForm" *ngIf="isPersonalEditing">
+
+      <div class="col-sm-8 mt-4">
+        <label for="name">Nome</label>
+        <div class="form-group" [ngClass]="isFieldInvalid(personalForm, 'name') ? 'has-danger' : ''">
+            <input formControlName="name"  type="text" class="form-control form-control-danger" id="inputDanger" placeholder="Nome Completo">
+            <div *ngIf="isFieldInvalid(personalForm, 'name')" class="form-control-feedback">Nome é obrigatório</div>
+        </div>
+      </div>
+
+      <div class="col-sm-8 mt-4">
+        <label for="name">Telefone</label>
+        <div class="form-group" [ngClass]="isFieldInvalid(personalForm, 'tel') ? 'has-danger' : ''">
+            <input formControlName="tel"  type="text" class="form-control form-control-danger" id="inputDanger" placeholder="Telefone">
+            <div *ngIf="isFieldInvalid(personalForm, 'tel')" class="form-control-feedback">Teleforne é obrigatorio</div>
+        </div>
+      </div>
+
+      <div class="col-sm-8 mt-4">
+        <label for="name">Whats App</label>
+        <div class="form-group" [ngClass]="isFieldInvalid(personalForm, 'whats_app') ? 'has-danger' : ''">
+            <input formControlName="whats_app"  type="text" class="form-control form-control-danger" id="inputDanger" placeholder="Whats_app">
+            <div *ngIf="isFieldInvalid(personalForm, 'whats_app')" class="form-control-feedback">Nome é obrigatório</div>
+        </div>
       </div>
 
       <div class="form-actions">
-        <button type="submit" [disabled]="personalForm.invalid || isSaving">
+        <button type="submit" [disabled]="personalForm.invalid || isSaving" (click)="savePersonal()">
           {{ isSaving ? 'Salvando...' : 'Salvar Alterações' }}
         </button>
       </div>
@@ -47,13 +54,15 @@
     <div class="info-display" *ngIf="!isPersonalEditing">
 
       <div class="info-row">
-        <h2>Roberto Chaves Souza</h2>
+        <h6>{{this.profileService.user().name}}</h6>
       </div>
       <div class="info-row">
-        <h3>{{"roberto@gmail.com"}}</h3>
+        <p>{{this.profileService.user().email}}</p>
+        <p>Whats App: {{this.profileService.user().whats_app}}</p>
       </div>
       <div class="info-row">
-        <h3>CPF 033.055.433-66</h3>
+        <p>CPF {{this.profileService.user().cpf}}</p>
+        <p>Tel: {{this.profileService.user().tel}}</p>
       </div>
     </div>
   </div>
@@ -61,19 +70,14 @@
   <!-- Address Card -->
   <div class="profile-card">
     <div class="card-header">
-      <h2>Endereço</h2>
+      <h5>Endereço</h5>
       <i
         [ngClass]="!isAddressEditing ?'bi bi-pencil':'bi bi-x'"
         (click)="toggleAddressEdit()"
+        (keydown)="toggleAddressEdit()"
         [class.active]="isAddressEditing">
       </i>
-      <!-- <button
-        class="edit-button"
-        (click)="toggleAddressEdit()"
-        [class.active]="isAddressEditing">
-        <i class="fas fa-pencil-alt"></i>
-        {{ isAddressEditing ? 'Cancelar' : 'Editar' }}
-      </button> -->
+
     </div>
 
     <form [formGroup]="addressForm" *ngIf="isAddressEditing" (ngSubmit)="saveAddress()">
@@ -82,10 +86,10 @@
         <input
           id="cep"
           type="text"
-          formControlName="cep"
+          formControlName="postal_code"
           mask="00000-000"
           (blur)="onCepBlur()"
-          [class.error]="isFieldInvalid(addressForm, 'cep')">
+          [class.error]="isFieldInvalid(addressForm, 'postal_code')">
       </div>
 
       <div class="form-grid">
@@ -124,10 +128,19 @@
             formControlName="state"
             [class.error]="isFieldInvalid(addressForm, 'state')">
         </div>
+
+        <div class="form-field">
+          <label for="state">País*</label>
+          <input
+            id="country"
+            type="text"
+            formControlName="country"
+            [class.error]="isFieldInvalid(addressForm, 'country')">
+        </div>
       </div>
 
       <div class="form-actions">
-        <button type="submit" [disabled]="addressForm.invalid || isSaving">
+        <button type="submit" [disabled]="addressForm.invalid || isSaving" (click)="saveAddress()">
           {{ isSaving ? 'Salvando...' : 'Salvar Alterações' }}
         </button>
       </div>
@@ -136,19 +149,23 @@
     <div class="info-display" *ngIf="!isAddressEditing">
       <div class="info-row">
         <span class="label">CEP:</span>
-        <span class="value">{{ addressForm.get('cep')?.value }}</span>
+        <span class="value">{{ this.profileService.user().address.postal_code }}</span>
       </div>
       <div class="info-row">
         <span class="label">Endereço:</span>
-        <span class="value">{{ addressForm.get('street')?.value }}</span>
+        <span class="value">{{ this.profileService.user().address.street}}</span>
       </div>
       <div class="info-row">
         <span class="label">Bairro:</span>
-        <span class="value">{{ addressForm.get('neighborhood')?.value }}</span>
+        <span class="value">{{ this.profileService.user().address.neighborhood }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">País:</span>
+        <span class="value">{{ this.profileService.user().address.country }}</span>
       </div>
       <div class="info-row">
         <span class="label">Cidade/Estado:</span>
-        <span class="value">{{ addressForm.get('city')?.value }}/{{ addressForm.get('state')?.value }}</span>
+        <span class="value">{{ this.profileService.user().address.city }} / {{ this.profileService.user().address.state }}</span>
       </div>
     </div>
   </div>

@@ -1,10 +1,11 @@
-import { toSignal } from '@angular/core/rxjs-interop';
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ProfileService } from 'src/app/services/api/profile.service';
+
 import { ShotNamePipe } from '../pipes/shot-name.pipe';
-import { UserService } from 'src/app/services/api/user/user.service';
+import { UserService } from 'src/app/services/user/user.service';
+import { ProfileService } from 'src/app/services/profile/profile.service';
+
 
 @Component({
   selector: 'app-nav-bar',
@@ -26,6 +27,7 @@ export class NavBarComponent implements OnInit {
 
   }
 
+  public userName = "implementar nome"
 
   navigate(route:string){
     this.router.navigate([route])

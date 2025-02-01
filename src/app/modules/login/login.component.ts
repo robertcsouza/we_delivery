@@ -4,8 +4,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthRequest } from 'src/app/models/interfaces/user/RequestInterface';
-import { UserService } from 'src/app/services/api/user/user.service';
+
 import { NavBarComponent } from "../../shared/nav-bar/nav-bar.component";
+import { UserService } from 'src/app/services/user/user.service';
 
 
 @Component({

@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { UserService } from '../services/api/user/user.service';
+
 import { Router, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ProfileService } from '../services/api/profile.service';
+import { ProfileService } from '../services/profile/profile.service';
+import { UserService } from '../services/user/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,6 @@ export class AuthGuard {
       return false;
     }
     this.userService.isLoggedIn();
-    this.profileService.getUser()
     return true;
   }
 }

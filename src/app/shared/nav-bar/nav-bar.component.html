@@ -16,7 +16,7 @@
       <button class="bt-link" (click)="navigate('dashboard')"><i class="bi bi-house"></i>  Início</button>
       <button class="bt-link" (click)="navigate('dashboard/order/create')"><i class="bi bi-file-earmark-plus"></i> Solicitar</button>
       <button class="bt-link"><i class="bi bi-compass"></i> About</button>
-      <button *ngIf="is_logged_in" class="bt-link perfil-menu" (click)="navigate('perfil')">Olá, {{this.profileService.user()?.name | shotName}}</button>
+      <button *ngIf="is_logged_in" class="bt-link perfil-menu" (click)="navigate('perfil')">Olá, {{this.userName | shotName}}</button>
       <button *ngIf="!is_logged_in" type="button" class="btn btn-login btn-round btn-sm" (click)="navigate('register')" >Cadastre-se</button>
       <button *ngIf="!is_logged_in" type="button" class="btn btn-register btn-outline btn-round btn-sm" (click)="navigate('login')">entrar</button>
     </div>

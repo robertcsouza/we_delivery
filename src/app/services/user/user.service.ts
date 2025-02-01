@@ -2,12 +2,12 @@
 import {  inject, Injectable, input, signal, WritableSignal } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
-import { AuthAction, AuthRequest, AuthResponse, RegisterRequest } from '../../../models/interfaces/user/RequestInterface';
 import {catchError, EMPTY, map, Observable, of, OperatorFunction, Subject, switchMap, tap,} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop'
 import { Router } from '@angular/router';
 import { Effect } from 'src/app/models/interfaces/effects/EffectInterface';
+import { AuthRequest, AuthResponse, RegisterRequest } from 'src/app/models/interfaces/user/RequestInterface';
 
 @Injectable({
   providedIn: 'root'
