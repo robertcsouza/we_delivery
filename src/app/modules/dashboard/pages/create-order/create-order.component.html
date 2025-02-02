@@ -13,34 +13,36 @@
         <div class="form-section">
           <h5>Suas Informações</h5>
 
+         <div formGroupName="package_receiver">
           <div class="col-sm-8 mt-4">
-            <div class="form-group" [ngClass]="isFieldInvalid('name') ? 'has-danger' : ''">
+            <div class="form-group" [ngClass]="isFieldInvalid('name',this.packageReceiver) ? 'has-danger' : ''">
                 <input formControlName="name"  type="text" class="form-control form-control-danger" id="inputDanger" placeholder="Nome Completo">
-                <div *ngIf="isFieldInvalid('name')" class="form-control-feedback">Nome é obrigatório</div>
+                <div *ngIf="isFieldInvalid('name',this.packageReceiver)" class="form-control-feedback">Nome é obrigatório</div>
             </div>
           </div>
 
           <div class="col-sm-8 mt-4">
-              <div class="form-group" [ngClass]="isFieldInvalid('cpf') ? 'has-danger' : ''">
+              <div class="form-group" [ngClass]="isFieldInvalid('cpf',this.packageReceiver) ? 'has-danger' : ''">
                   <input formControlName="cpf" mask="000.000.000-00"  type="text" class="form-control form-control-danger" id="inputDanger" placeholder="CPF">
-                  <div *ngIf="isFieldInvalid('cpf')" class="form-control-feedback">CPF é obrigatório</div>
+                  <div *ngIf="isFieldInvalid('cpf',this.packageReceiver)" class="form-control-feedback">CPF é obrigatório</div>
               </div>
           </div>
 
           <div class="col-sm-8 mt-4">
-              <div class="form-group" [ngClass]="isFieldInvalid('phone') ? 'has-danger' : ''">
+              <div class="form-group" [ngClass]="isFieldInvalid('phone',this.packageReceiver) ? 'has-danger' : ''">
                   <input formControlName="phone" mask="(00) 00000-0000"  type="text" class="form-control form-control-danger" id="inputDanger" placeholder="Telefone">
-                  <div *ngIf="isFieldInvalid('phone')" class="form-control-feedback">Telefone é obrigatório</div>
+                  <div *ngIf="isFieldInvalid('phone',this.packageReceiver)" class="form-control-feedback">Telefone é obrigatório</div>
               </div>
           </div>
 
+         </div>
           <div class="col-sm-8 mt-4">
             <span>Produto para entrega?</span>
             <div class="mt-2 input-check">
-              <input type="radio" value="Yes"/> <span>Sim</span>
+              <input type="radio" formControlName="to_delivery" value="true"/> <span>Sim</span>
             </div>
             <div class="mt-2 input-check">
-              <input type="radio" value="no" formControlName="to_delivery"/> <span>Não</span>
+              <input type="radio" formControlName="to_delivery" value="false" /> <span>Não</span>
             </div>
           </div>
 
@@ -53,79 +55,79 @@
           <h5>Sobre o Produto</h5>
 
           <div class="col-sm-8 mt-4">
-            <div class="form-group" [ngClass]="isFieldInvalid('product_name') ? 'has-danger' : ''">
+            <div class="form-group" [ngClass]="isFieldInvalid('product_name',this.registrationForm) ? 'has-danger' : ''">
                 <input formControlName="product_name"  type="text" class="form-control form-control-danger" id="inputDanger" placeholder="Nome do Produto">
-                <div *ngIf="isFieldInvalid('product_name')" class="form-control-feedback">Por favor de um nome para seu produto</div>
+                <div *ngIf="isFieldInvalid('product_name',this.registrationForm)" class="form-control-feedback">Por favor de um nome para seu produto</div>
             </div>
           </div>
 
           <div class="col-sm-8 mt-4">
-            <select id="size" formControlName="size" class="form-control form-control-danger" [class.error]="isFieldInvalid('size')">
+            <select id="size" formControlName="size" class="form-control form-control-danger" [class.error]="isFieldInvalid('size',this.registrationForm)">
               <option value="">Selecione o tamanho aproximado</option>
-              <option value="P">P (carta ou envelope)</option>
-              <option value="M">M (até 30cm) </option>
-              <option value="G">G (mais de 30cm) </option>
+              <option value="p">P (carta ou envelope)</option>
+              <option value="m">M (até 30cm) </option>
+              <option value="g">G (mais de 30cm) </option>
             </select>
-            <div *ngIf="isFieldInvalid('size')" class="form-control-feedback">Por favor de um nome para seu produto</div>
+            <div *ngIf="isFieldInvalid('size',this.registrationForm)" class="form-control-feedback">Por favor de um nome para seu produto</div>
           </div>
 
           <div class="col-sm-8 mt-4">
-            <select id="size" formControlName="weight" class="form-control form-control-danger" [class.error]="isFieldInvalid('weight')">
+            <select id="size" formControlName="weight" class="form-control form-control-danger" [class.error]="isFieldInvalid('weight',this.registrationForm)">
               <option value="">Selecione o peso aproximado</option>
-              <option value="P">P (1kG)</option>
-              <option value="M">M (1kg á 3kg) </option>
-              <option value="G">G (3kg á 10kg) </option>
+              <option value="p">P (1kG)</option>
+              <option value="m">M (1kg á 3kg) </option>
+              <option value="g">G (3kg á 10kg) </option>
             </select>
-            <div *ngIf="isFieldInvalid('weight')" class="form-control-feedback">Por favor de um nome para seu produto</div>
+            <div *ngIf="isFieldInvalid('weight',this.registrationForm)" class="form-control-feedback">Por favor de um nome para seu produto</div>
           </div>
 
           <h6 class="mt-4 text-danger">Atenção: Para produtos maiores que os tamanhos acima informados por favor entra em contato antes de finalizar o pedido.</h6>
           <button type="button" class="btn btn-outline-success btn-round"><i class="bi bi-whatsapp"></i> Contato</button>
       </div>
         <!-- Address Information -->
-        <div class="form-section full-width">
+        <div formGroupName="address" class="form-section full-width">
           <h5>Endereço para Entrega</h5>
 
           <div class="col-sm-3 mt-4">
-            <div class="form-group" [ngClass]="isFieldInvalid('cep') ? 'has-danger' : ''">
-                <input formControlName="cep"  type="text" class="form-control form-control-danger" id="inputDanger" placeholder="CEP">
-                <div *ngIf="isFieldInvalid('cep')" class="form-control-feedback">CEP Inválido</div>
+            <div class="form-group" [ngClass]="isFieldInvalid('postal_code',this.address) ? 'has-danger' : ''">
+                <input formControlName="postal_code"  type="text" class="form-control form-control-danger" id="inputDanger" placeholder="CEP">
+                <div *ngIf="isFieldInvalid('postal_code',this.address)" class="form-control-feedback">CEP Inválido</div>
             </div>
           </div>
 
           <div class="address-grid">
             <div class="mt-4">
-              <div class="form-group" [ngClass]="isFieldInvalid('street') ? 'has-danger' : ''">
+              <div class="form-group" [ngClass]="isFieldInvalid('street',this.address) ? 'has-danger' : ''">
                   <input formControlName="street"  type="text" class="form-control form-control-danger" id="inputDanger" placeholder="Rua">
-                  <div *ngIf="isFieldInvalid('street')" class="form-control-feedback">Rua é Obrigatório</div>
+                  <div *ngIf="isFieldInvalid('street',this.address)" class="form-control-feedback">Rua é Obrigatório</div>
               </div>
             </div>
 
             <div class="mt-4">
-              <div class="form-group" [ngClass]="isFieldInvalid('neighborhood') ? 'has-danger' : ''">
+              <div class="form-group" [ngClass]="isFieldInvalid('neighborhood',this.address) ? 'has-danger' : ''">
                   <input formControlName="neighborhood"  type="text" class="form-control form-control-danger" id="inputDanger" placeholder="Bairro">
-                  <div *ngIf="isFieldInvalid('neighborhood')" class="form-control-feedback">Bairro é Obrigatório</div>
+                  <div *ngIf="isFieldInvalid('neighborhood',this.address)" class="form-control-feedback">Bairro é Obrigatório</div>
               </div>
             </div>
 
             <div class="mt-4">
-              <div class="form-group" [ngClass]="isFieldInvalid('city') ? 'has-danger' : ''">
-                  <input formControlName="city"  type="text" class="form-control form-control-danger" id="inputDanger" placeholder="Cidade">
-                  <div *ngIf="isFieldInvalid('city')" class="form-control-feedback">Bairro é Obrigatório</div>
+              <div class="form-group" [ngClass]="isFieldInvalid('city',this.address) ? 'has-danger' : ''">
+                  <input formControlName="city" [readOnly]="true" type="text" class="form-control form-control-danger" id="inputDanger" placeholder="Cidade">
+                  <div *ngIf="isFieldInvalid('city',this.address)" class="form-control-feedback">Cidade é Obrigatório</div>
               </div>
             </div>
 
             <div class="mt-4">
-              <div class="form-group" [ngClass]="isFieldInvalid('state') ? 'has-danger' : ''">
-                  <input formControlName="state"  type="text" class="form-control form-control-danger" id="inputDanger" placeholder="Estado">
-                  <div *ngIf="isFieldInvalid('state')" class="form-control-feedback">Bairro é Obrigatório</div>
+              <div class="form-group" [ngClass]="isFieldInvalid('state',this.address) ? 'has-danger' : ''">
+                  <input formControlName="state" [readOnly]="true"  type="text" class="form-control form-control-danger" id="inputDanger" placeholder="Estado">
+                  <div *ngIf="isFieldInvalid('state',this.address)" class="form-control-feedback">Estado é Obrigatório</div>
               </div>
             </div>
 
             <div class="mt-4">
-              <div class="form-group" [ngClass]="isFieldInvalid('country') ? 'has-danger' : ''">
-                  <input formControlName="country"  type="text" class="form-control form-control-danger" id="inputDanger" placeholder="País">
-                  <div *ngIf="isFieldInvalid('country')" class="form-control-feedback">Bairro é Obrigatório</div>
+              <div class="form-group" [ngClass]="isFieldInvalid('country',this.address) ? 'has-danger' : ''">
+                  <input formControlName="country" [readOnly]="true"  type="text" class="form-control form-control-danger" id="inputDanger" placeholder="País">
+                  <div *ngIf="isFieldInvalid('country',this.address)" class="form-control-feedback">País é Obrigatório</div>
               </div>
             </div>
           </div>

@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { NavBarComponent } from "./shared/nav-bar/nav-bar.component";
 import { NgxsModule } from '@ngxs/store';
 import { ProfileState } from './services/profile/state/profile.state';
+import { OrderState } from './services/orders/state/orders.state';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { ProfileState } from './services/profile/state/profile.state';
     NgbModule,
     CommonModule,
     NavBarComponent,
-    NgxsModule.forRoot([ProfileState])
+    NgxsModule.forRoot([ProfileState,OrderState])
 
 ],
   providers: [provideHttpClient()],

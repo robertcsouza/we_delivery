@@ -15,11 +15,8 @@
   </div>
 
 
-  <div class="purchases-list">
-    <app-order-card></app-order-card>
-    <app-order-card></app-order-card>
-    <app-order-card></app-order-card>
-
+  <div class="purchases-list" *ngFor="let item of this.orderService.orders()">
+    <app-order-card [orderData]="item"></app-order-card>
   </div>
 </div>
 </div>

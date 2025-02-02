@@ -1,22 +1,22 @@
-<div class="purchase-date">{{ purchase.date }}</div>
+<div class="purchase-date">setar data back</div>
 <div class="purchase-card">
   <div class="purchase-info">
     <div class="purchase-details">
       <div class="status">
-        <span class="status-label">{{ purchase.status }}</span>
+        <span class="status-label">setar status back</span>
         <span class="delivery-date">
-          Você retirou no dia {{ purchase.deliveryDate }}
+          Você retirou no dia setar delivery datea
           <i class="bi bi-lightning-charge-fill"></i>
         </span>
       </div>
-      <div class="product-name">{{ purchase.product.name }}</div>
-      <div class="quantity">{{ purchase.product.quantity }}</div>
+      <div class="product-name">{{ orderData.product_name }}</div>
+      <div class="quantity">{{ orderData.quantity }}</div>
     </div>
   </div>
 
   <div class="purchase-actions">
     <div class="seller">Entregar para</div>
-    <a href="#" class="message-link">Roberto chaves Souza</a>
+    <a href="#" class="message-link">{{orderData.package_receiver.name}}</a>
     <div class="buttons">
       <button type="button" class="btn btn-danger  btn-sm">Availar Entrega</button>
       <a href="https://api.whatsapp.com/send?phone=50600000000" class="btn btn-outline-success  btn-sm"><i class="bi bi-whatsapp"></i> Falar Sobrea a entrega</a>

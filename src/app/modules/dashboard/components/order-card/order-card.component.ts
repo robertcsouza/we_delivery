@@ -1,5 +1,6 @@
+import { OrderData } from './../../../../models/interfaces/orders/orders.interface';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-order-card',
@@ -9,6 +10,8 @@ import { Component } from '@angular/core';
   styleUrl: './order-card.component.scss'
 })
 export class OrderCardComponent {
+  @Input({required:true}) orderData!:OrderData
+  constructor(){}
   purchase: any =
     {
       id: 1,
